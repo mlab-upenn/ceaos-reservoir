@@ -35,13 +35,13 @@ def main():
         time.sleep(5.0)
         for dev in device_list:
             if dev.address == 99:
-                ph = float(dev.read())
-                ph = int(ph)
+                ph = dev.read()
+                ph = float(ph[0:4])
             elif dev.address == 100:
                 ec = float(dev.read())
             elif dev.address == 102:
                 watertemp = dev.read()
-                watertemp = watertemp
+                watertemp = float(watertemp[0:4])
                 farenheit = str((float(watertemp) * 1.8) + 32)
 
         payload = json.dumps(

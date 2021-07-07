@@ -25,7 +25,7 @@ def get_devices():
 def main():
      context = zmq.Context()
      socket = context.socket(zmq.REQ)
-     socket.connect("tcp://10.103.105.181:23267")
+     socket.connect("tcp://10.103.105.181:23267")	# Replace with your IP Address
      time.sleep(2)
      device_list = get_devices()
 

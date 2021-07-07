@@ -32,7 +32,7 @@ def main():
      while True:
         for dev in device_list:
              dev.write("R")
-        time.sleep(5.0)
+        time.sleep(300)
         for dev in device_list:
             if dev.address == 99:
                 ph = dev.read()

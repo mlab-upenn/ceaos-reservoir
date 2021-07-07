@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name='ceaos_temphumidity',
+    name='ceaos_reservoir',
     version='0.0.1',
-    packages=['ceaos_temphumidity'],
+    packages=['ceaos_reservoir'],
     install_requires=[
         'pigpio',
         'zmq'

@@ -2,6 +2,10 @@ import time
 import string
 import zmq
 import json
+import io
+import sys
+import fcntl
+import copy
 from .AtlasI2C import (
 	 AtlasI2C
     )
@@ -19,34 +23,41 @@ def get_devices():
     return device_list
 
 def main():
-    context = zmq.Context()
-    socket = context.socket(zmq.REQ)
-    socket.connect("tcp://localhost:23267")
-    device_list = get_devices()
+     context = zmq.Context()
+     socket = context.socket(zmq.REQ)
+     socket.connect("tcp://10.103.105.181:23267")
+     time.sleep(2)
+     device_list = get_devices()
 
-    while True:
+     while True:
         for dev in device_list:
              dev.write("R")
+        time.sleep(5.0)
         for dev in device_list:
             if dev.address == 99:
-                ph = dev.read()
+                ph = float(dev.read())
+                ph = int(ph)
             elif dev.address == 100:
-                ec = dev.read()
+                ec = float(dev.read())
             elif dev.address == 102:
                 watertemp = dev.read()
-                farenheit = (watertemp * 1.8) + 32
+                watertemp = watertemp
+                farenheit = str((float(watertemp) * 1.8) + 32)
 
-        payload = {
+        payload = json.dumps(
+             {
                 "action": "recv_value",
                 "cea-addr": "farm1.env1.bed1.resevoir",
                 "payload": {
                     "ph": ph,
-                    "ec": ec,
                     "watertemp": farenheit
-                }
-            }
-        socket.send_json(payload)
-        time.sleep(3.0) 
+                },
+             }
+        )
+        socket.send_string(payload)
+        reply = socket.recv()
+        reply = json.loads(reply)
+        print(reply)
 
 if __name__ == '__main__':
     main()

@@ -6,5 +6,6 @@ setup(
     packages=['ceaos_temphumidity'],
     install_requires=[
         'pigpio',
+        'zmq'
     ],
 )

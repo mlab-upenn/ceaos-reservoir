@@ -38,7 +38,8 @@ def main():
                 ph = dev.read()
                 ph = float(ph[0:4])
             elif dev.address == 100:
-                ec = float(dev.read())
+                ec = dev.read()
+                ec = float(ec[0:4])
             elif dev.address == 102:
                 watertemp = dev.read()
                 watertemp = float(watertemp[0:4])
@@ -50,6 +51,7 @@ def main():
                 "cea-addr": "farm1.env1.bed1.resevoir",
                 "payload": {
                     "ph": ph,
+                    "ec": ec,
                     "watertemp": farenheit
                 },
              }

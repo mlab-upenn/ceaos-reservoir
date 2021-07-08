@@ -43,7 +43,7 @@ def main():
             elif dev.address == 102:
                 watertemp = dev.read()
                 watertemp = float(watertemp[0:4])
-                farenheit = str((float(watertemp) * 1.8) + 32)
+                farenheit = (watertemp * 1.8) + 32
 
         payload = json.dumps(
              {

@@ -48,7 +48,7 @@ def main():
         payload = json.dumps(
              {
                 "action": "recv_value",
-                "cea-addr": "farm1.env1.bed1.resevoir",
+                "cea-addr": "farm1.env1.bed1.resevoir1",
                 "payload": {
                     "ph": ph,
                     "ec": ec,
